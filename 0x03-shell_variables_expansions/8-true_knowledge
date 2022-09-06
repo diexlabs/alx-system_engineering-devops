@@ -1,2 +1,2 @@
 #!/bin/bash
-printf "$((100 + TRUEKNOWLEDGE))\n"
+printf "$((100 + $TRUEKNOWLEDGE))\n"
