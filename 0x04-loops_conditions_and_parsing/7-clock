@@ -15,4 +15,3 @@ do
 	(( minutes = 0 ));
 	(( hours += 1 ));
 done
-
