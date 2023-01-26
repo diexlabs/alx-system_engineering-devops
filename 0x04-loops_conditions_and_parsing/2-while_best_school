@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#script that demonstrates iteration using while loop
+
+count=0
+maxCount=10
+
+while [ $count -lt $maxCount ]
+do
+	echo "Best School";
+	(( count += 1 ));
+done;
+

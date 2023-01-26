@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# script to demonstrate iteration in bash using until command
+
+count=0
+maxCount=10
+
+until [ $count -ge $maxCount ]
+do
+	echo "Best School";
+	(( count += 1 ));
+done

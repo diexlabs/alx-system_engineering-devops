@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# script to demonstrate the use of read and cut
+
+while read -r -s line
+do
+	csv=$(cut -d ":" -f 1-7 --output-delimiter=" " <<< "$line");
+	read -r -a arr <<< "$csv";
+	username=${arr[0]};
+	password=${arr[1]};
+	uid=${arr[2]};
+	gid=${arr[3]};
+	info=${arr[4]};
+	home=${arr[5]};
+	shell=${arr[6]};
+
+	echo "The user $username is part of the $gid gang, lives in $home and rides $shell. $uid's place is protected by the passcode $password, more info about the user here: $info"
+done < "/etc/passwd"

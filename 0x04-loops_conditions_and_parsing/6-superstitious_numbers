@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# script to demonstrate use of case statement in bash
+
+count=1
+max=20
+
+while [ $count -le $max ]
+do
+	case $count in
+		4)
+			echo "bad luck from China";
+			;;
+		9)
+			echo "bad luck from Japan";
+			;;
+		17)
+			echo "bad luck from Italy";
+			;;
+		*)
+			echo "$count";
+			;;
+	esac
+	(( count += 1 ));
+done
