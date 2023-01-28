@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # this script prints the pid of the process
 
-ps | grep "bash" | awk -F " " '{print $1}' | tail -n 1
+pgrep bash | awk -F " " '{print $1}' | tail -n 1
 
