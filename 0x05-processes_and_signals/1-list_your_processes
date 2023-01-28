@@ -2,3 +2,4 @@
 # a script that displays all currently running process
 
 ps axu
+
