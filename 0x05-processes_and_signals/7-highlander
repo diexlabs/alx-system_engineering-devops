@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # a script demonstrating the use of trap to catch signals
 
-trap 'echo I am invincible!!!; exit' 15
+trap 'echo I am invincible!!!; exit' SIGTERM
 
 while true
 do
