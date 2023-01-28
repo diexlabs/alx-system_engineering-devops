@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# an init script to manage `manage_my_process` script
+
+function nice_exit() {
+	echo "Usage: manage_my_process {start|stop|restart}";
+	exit;
+}
+
+function start_manage() {
+	bash ./manage_my_process &
+	echo "$!" > /var/run/my_process.pid;
+}
+
+function stop_manage() {
+	[ -e /var/run/my_process.pid ] &&\
+		sudo pkill -f './manage_my_process' &&\
+	       	rm /var/run/my_process.pid;
+}
+if [ $# -eq 2 ]
+then
+	nice_exit;
+fi
+
+case "$1" in
+	start)
+		start_manage;
+		echo "manage_my_process started";
+		;;
+	stop)
+		stop_manage;
+		echo "manage_my_process stopped";
+		;;
+	restart)
+		stop_manage;
+		start_manage;
+		echo "manage_my_process restarted";
+		;;
+	*)
+		nice_exit;
+esac
+
