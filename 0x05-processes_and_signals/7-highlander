@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# a script demonstrating the use of trap to catch signals
+
+trap 'echo I am invincible!!!; exit' 15
+
+while true
+do
+	echo "To infinity and beyond";
+	sleep 2;
+done
+

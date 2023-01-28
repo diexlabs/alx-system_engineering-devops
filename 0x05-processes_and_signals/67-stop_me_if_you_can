@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# script that kills another process
+
+pkill -f --signal 15 7-highlander
+
