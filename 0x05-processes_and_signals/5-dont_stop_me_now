@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # a script to stop `to_infinity_and_beyond` script if it runs in background
 
-kill -9 $(ps axu | grep "4-to_infinity_and_beyond" | awk '{print $2}') 
+kill -9 $(pgrep -f 4-to_infinity_and_beyond) 
 
