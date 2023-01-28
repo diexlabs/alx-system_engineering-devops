@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # a script that displays all the processes of bash
-# shellcheck disable=SC2009
 
 ./1-list_your_processes | grep "bash" | awk '{print $2 " " $11}'
 
