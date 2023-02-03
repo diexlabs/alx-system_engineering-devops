@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# listening on port 98
+
+nc -l 98
+
