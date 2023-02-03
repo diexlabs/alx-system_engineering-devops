@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# a scripts that modifies the hosts config
+
+sed "s/[^\s]*\tlocalhost$/127.0.0.2\tlocalhost/" /etc/hosts > ~/hosts.new;
+echo "\n8.8.8.8\tfacebook" >> ~/hosts.new;
+
+cat ~/hosts.new;
