@@ -1,3 +1,4 @@
+# manifest to create a school file in /tmp
 file {'/tmp/school':
   ensure  => present,
   owner   => 'www-data',
