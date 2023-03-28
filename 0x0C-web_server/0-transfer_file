@@ -12,9 +12,9 @@ USERNAME=$3
 
 if [ $# -eq 3 ]
 then
-	scp -o StrictHostKeyChecking=no $SOURCE "$USERNAME@$IP:~/";
+	scp -o StrictHostKeyChecking=no "$SOURCE" "$USERNAME@$IP:~/";
 elif [ $# -gt 3 ]
 then
 	KEYFILE=$4
-	scp -o StrictHostKeyChecking=no $SOURCE "$USERNAME@$IP:~/" -i $KEYFILE;
+	scp -o StrictHostKeyChecking=no "$SOURCE" "$USERNAME@$IP:~/" -i "$KEYFILE";
 fi
