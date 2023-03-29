@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# starts an apache web server inside a docker container
+
+docker ps | grep holbertonschool | cut -d' ' -f1 | xargs -I {} docker exec {} sh -c "sudo service apache2 start" 
