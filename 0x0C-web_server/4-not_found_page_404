@@ -3,16 +3,28 @@
 
 sudo apt-get update;
 sudo apt-get install nginx -y;
+
+
+# creates the webserver index page
 echo "Hello World!" > index.html && mv index.html /var/www/html/;
+
+# creates the webserver error page
+echo "Ceci n'est pas une page" > error404.html && mv error404.html /var/www/html/;
 
 inputFile="/etc/nginx/sites-available/default";
 
+# removes the redirect_me location directive if it exist
 sed -i "/location \/redirect_me {/,/\s}/d" "$inputFile";
 
 redirect_string="\
 	\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}";
 sudo sed -i "/root \/var\/www\/html/i $redirect_string" "$inputFile";
 
+sudo sed -i '/error_page/d';
+sudo sed -i '/server_name _/a \
+	\n\terror_page 404 /var/www/html/error404.html;' "$inputFile";
+
 sudo sed -i 's/tlocation/\tlocation/' "$inputFile";
 
+# restart the server after edits
 sudo service nginx restart;
