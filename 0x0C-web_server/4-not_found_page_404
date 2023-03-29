@@ -22,7 +22,7 @@ sudo sed -i "/root \/var\/www\/html/i $redirect_string" "$inputFile";
 
 sudo sed -i '/error_page/d';
 sudo sed -i '/server_name _/a \
-	\n\terror_page 404 /var/www/html/error404.html;' "$inputFile";
+	\n\terror_page 404 /error404.html;' "$inputFile";
 
 sudo sed -i 's/tlocation/\tlocation/' "$inputFile";
 
