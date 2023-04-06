@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# configures a load balancer
+
+# install HAproxy
+#apt-get install --no-install-recommends software-properties-common -y;
+#add-apt-repository ppa:vbernat/haproxy-2.0 -y;
+
+#apt-get install haproxy=2.0.\* -y;
+
+configFile=/etc/haproxy/haproxy.cfg;
+
+# delete all configured backend and frontend
+sed -i '/^frontend/,/^$/d' "$configFile";
+sed -i '/^backend/,/^$/d' "$configFile";
+
+# add frontend
+sed -i "$ a \\
+	\nfrontend web\n\tbind :80,:8000\n\tdefault_backend servers\n" "$configFile";
+
+# add backend
+sed -i "$ a \
+	backend servers\n\
+	balance roundrobin\n\
+	server web-01 3.94.211.128:80 check\n\
+	server web-02 52.91.123.252:80 check\n" "$configFile";
