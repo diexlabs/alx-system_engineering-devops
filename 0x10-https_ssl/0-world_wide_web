@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# quering server information with dig
+# processed with awk
+
+function query_subdomain() {
+	s=$(dig "$2.$1" | grep -A1 "ANSWER" | tail -n 1);
+        echo "$s" | awk '{print "The subdomain ", $2, " is a ", $4, " record and points to ", $5}';
+}
+
+if [ $# -eq 1 ]
+then
+	for sub in www lb-01 web-01 web-02
+	do
+		query_subdomain "$1" "$sub";
+	done
+elif [ $# -eq 2 ]
+then
+	query_subdomain "$1" "$2";
+fi
+	
