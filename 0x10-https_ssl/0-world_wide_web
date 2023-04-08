@@ -4,7 +4,9 @@
 
 function query_subdomain() {
 	s=$(dig "$2.$1" | grep -A1 "ANSWER" | tail -n 1);
-        echo "$s" | awk '{print "The subdomain ", $2, " is a ", $4, " record and points to ", $5}';
+	RTYPE=$(echo "$s" | awk '{print $4}');
+	DEST=$(echo "$s" | awk '{print $5}');
+        echo "The subdomain $2 is a $RTYPE record and points to $DEST}";
 }
 
 if [ $# -eq 1 ]
