@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Fix nginx server error
-
-sudo rm /etc/nginx/sites-enabled/*;
-sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/;
-sudo service nginx start;
+sed -i 's/ipv6only=on//' /etc/nginx/sites-available/default;
+rm /etc/nginx/sites-enabled/default;
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/;
+service nginx start;
