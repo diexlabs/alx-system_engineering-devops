@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Fix nginx server error
+sed -i 's/ipv6only=on//' /etc/nginx/sites-enabled/default
+service nginx start
+pkill -o nginx
