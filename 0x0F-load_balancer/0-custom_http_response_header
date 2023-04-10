@@ -40,6 +40,9 @@ sudo sed -i '/error_page/d' "$inputFile";
 sudo sed -i "/server_name/a \\
         \n\terror_page 404 /error404.html;" "$inputFile";
 
+# replace server name
+sudo sed -i 's/server_name .*$/server_name web;/' "$inputFile";
+
 # remove all custom header blocks and add a new one
 sudo sed -i '/add_header/d' "$inputFile";
 sudo sed -i "/server_name _/a \\
