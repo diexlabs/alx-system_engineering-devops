@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# A script that runs whoami as any user passed param
+
+if [ $# -ge 1 ]
+then
+	sudo su -c "whoami" "$1";
+else
+	whoami;
+fi
