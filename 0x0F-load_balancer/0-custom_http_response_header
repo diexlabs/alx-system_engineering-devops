@@ -1,60 +1,24 @@
 #!/usr/bin/env bash
 # creates a new server block and configures it
 
-oldFile=/etc/nginx/sites-available/default;
-inputFile=/etc/nginx/sites-available/web;
-
-sudo cp "$oldFile" "$inputFile";
+nginxFile=/etc/nginx/sites-available/default;
 
 sudo apt-get update;
 sudo apt-get install nginx -y;
 
 # creates the webserver index page
-echo "Hello World!" > index.html && mv index.html /var/www/html/;
+sudo echo "Hello World!" > index.html && mv index.html /var/www/html/;
 
 # creates the webserver error page
-echo "Ceci n'est pas une page" > error404.html && mv error404.html /var/www/html/;
+sudo echo "Ceci n'est pas une page" > error404.html && mv error404.html /var/www/html/;
 
-# delete all commented lines
-sed -i '/^\s*#/d' "$inputFile";
-
-# remove the default_server from oldFile
-sed -i '/^\s*listen/d' "$oldFile";
-sed -i "/^\s*server {/a \\
-        listen 80;\n\tlisten [::]:80;\n" "$oldFile";
-
-# adds a default server block
-sed -i '/^\s*listen/d' "$inputFile";
-sed -i "/server {/a \\
-	listen 80 default_server;\n\tlisten [::]:80 default_server;\n" "$inputFile";
-
-# removes the redirect_me location directive if it exist
-sed -i "/location \/redirect_me {/,/\s}/d" "$inputFile";
-
-redirect_string="\
-        \tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}\n";
-sudo sed -i "/location \//i $redirect_string" "$inputFile";
-
-# clear error_page directive and reset it
-sudo sed -i '/error_page/d' "$inputFile";
-sudo sed -i "/server_name/a \\
-        \n\terror_page 404 /error404.html;" "$inputFile";
-
-# replace server name
-sudo sed -i 's/server_name .*$/server_name web;/' "$inputFile";
 
 # remove all custom header blocks and add a new one
-sudo sed -i '/add_header/d' "$inputFile";
-sudo sed -i "/server_name _/a \\
-        \n\tadd_header X-Served-By $HOSTNAME;" "$inputFile";
+sudo sed -i '/add_header/d' "$nginxFile";
+sudo sed -i "/^\s*server_name _/a \\
+        \n\tadd_header X-Served-By $HOSTNAME;" "$nginxFile";
 
-sudo sed -i 's/tlocation/\tlocation/' "$inputFile";
-
-# create a soft link to sites-enabled
-if [ ! -e /etc/nginx/sites-enabled/web ]
-then
-	sudo ln -s "$inputFile" "/etc/nginx/sites-enabled/";
-fi
+sudo sed -i 's/tlocation/\tlocation/' "$nginxFile";
 
 # restart nginx after editing conf
 sudo service nginx restart;

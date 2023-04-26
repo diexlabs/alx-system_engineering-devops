@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # configures a load balancer
 
-# install HAproxy
-#apt-get install --no-install-recommends software-properties-common -y;
-#add-apt-repository ppa:vbernat/haproxy-2.0 -y;
+install HAproxy
+apt-get install --no-install-recommends software-properties-common -y;
+add-apt-repository ppa:vbernat/haproxy-2.0 -y;
 
-#apt-get install haproxy=2.0.\* -y;
+apt-get install haproxy=2.0.\* -y;
 
 configFile=/etc/haproxy/haproxy.cfg;
 
